@@ -1,0 +1,6 @@
+CREATE SCHEMA `vendor` ;
+
+CREATE  TABLE `vendor`.`partner` (
+  `id` BIGINT NOT NULL AUTO_INCREMENT ,
+  PRIMARY KEY (`id`) );
+
