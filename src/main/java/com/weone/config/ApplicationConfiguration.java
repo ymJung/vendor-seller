@@ -24,7 +24,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  *
  */
 @Configuration
-@EnableAspectJAutoProxy(proxyTargetClass=true)
+@EnableAspectJAutoProxy(proxyTargetClass = true)
 @EnableTransactionManagement
 public class ApplicationConfiguration {
 
@@ -63,6 +63,7 @@ public class ApplicationConfiguration {
 
 		return entityManagerFactory;
 	}
+
 	@Bean
 	public JpaTransactionManager transactionManager() {
 		JpaTransactionManager transactionManager = new JpaTransactionManager();
