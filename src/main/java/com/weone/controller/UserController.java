@@ -21,26 +21,24 @@ import com.weone.service.UserAccountService;
 @RestController
 @RequestMapping("/user")
 public class UserController {
-     
-     @Autowired 
-     private AuthenticationManager authenticationManager;
-     @Autowired 
-     private UserAccountService userService;
-     
-     @RequestMapping(value="/login", method=RequestMethod.POST)
-     public AuthenticationToken login(@RequestBody LoginAccountDto authenticationRequest,
-               HttpSession session
-               ) {
-          String username = authenticationRequest.getUsername();
-          String password = authenticationRequest.getPassword();
-          
-          UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(username, password);
-          Authentication authentication = authenticationManager.authenticate(token);
-          SecurityContextHolder.getContext().setAuthentication(authentication);
-          session.setAttribute(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY,
-                    SecurityContextHolder.getContext());
-          
-          UserDetails user = userService.loadUserByUsername(username);
-          return new AuthenticationToken(user.getUsername(), user.getAuthorities(), session.getId());
-     }
+
+	@Autowired
+	private AuthenticationManager authenticationManager;
+	@Autowired
+	private UserAccountService userService;
+
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	public AuthenticationToken login(@RequestBody LoginAccountDto authenticationRequest, HttpSession session) {
+		String username = authenticationRequest.getUsername();
+		String password = authenticationRequest.getPassword();
+
+		UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(username, password);
+		Authentication authentication = authenticationManager.authenticate(token);
+		SecurityContextHolder.getContext().setAuthentication(authentication);
+		session.setAttribute(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY,
+				SecurityContextHolder.getContext());
+
+		UserDetails user = userService.loadUserByUsername(username);
+		return new AuthenticationToken(user.getUsername(), user.getAuthorities(), session.getId());
+	}
 }
